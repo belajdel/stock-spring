@@ -18,5 +18,6 @@ public class ValeurController {
     public ResponseEntity<Integer> getValeurStock() {
         Integer valeur = produitService.getValeurStock();
         return ResponseEntity.ok(valeur);
+        
     }
 }

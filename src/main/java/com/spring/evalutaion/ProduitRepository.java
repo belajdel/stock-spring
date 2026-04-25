@@ -34,9 +34,10 @@ public class ProduitRepository {
     }
 
 
-    public void save(Produit produit) {
+    public int save(Produit produit) {
         String sql = "INSERT INTO produit (nom, prix, quantite) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, produit.getNom(), produit.getPrix(), produit.getQuantite());
+        return 201;
     }
 
     public Integer getValeurStock() {

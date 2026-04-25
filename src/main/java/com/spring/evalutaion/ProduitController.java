@@ -14,27 +14,11 @@ public class ProduitController {
 
     @Autowired
     private ProduitService produitService;
-
-
     @GetMapping
     public ResponseEntity<List<Produit>> listerProduits() {
         List<Produit> produits = produitService.getAllProduits();
         return ResponseEntity.ok(produits);
     }
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Produit> getProduit(@PathVariable int id) {
-        Produit produit = produitService.getProduitById(id);
-        
-        if (produit == null) {
-            return ResponseEntity.notFound().build();
-        }
-        
-        return ResponseEntity.ok(produit);
-    }
-
-
     @PostMapping
     public ResponseEntity<Map<String, String>> createProduit(@RequestBody Produit produit) {
         produitService.createProduit(produit);
@@ -45,7 +29,6 @@ public class ProduitController {
         
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
     @GetMapping("/alerte/{seuil}")
     public ResponseEntity<List<Produit>> getProduitsAlerte(@PathVariable int seuil) {
         List<Produit> produits = produitService.getProduitsAlerte(seuil);

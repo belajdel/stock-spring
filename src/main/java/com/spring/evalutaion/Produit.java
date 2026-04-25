@@ -6,10 +6,7 @@ public class Produit {
     private Double prix;
     private Integer quantite;
 
-    // Default constructor for JSON deserialization
-    public Produit() {
-    }
-
+  
     public Produit(Integer id, String nom, Double prix, Integer quantite) {
         this.id = id;
         this.nom = nom;

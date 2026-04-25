@@ -3,7 +3,7 @@ package com.spring.evalutaion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+import java.util.ArrayList;
 @Service
 public class ProduitService {
 
@@ -22,7 +22,7 @@ public class ProduitService {
 
     public List<Produit> getProduitsAlerte(int seuil) {
         List<Produit> tous = produitRepository.findAll();
-        List<Produit> alertes = new java.util.ArrayList<>();
+        List<Produit> alertes = new ArrayList<>();
         for (Produit produit : tous) {
             if (produit.getQuantite() != null && produit.getQuantite() < seuil) {
                 alertes.add(produit);
@@ -30,4 +30,6 @@ public class ProduitService {
         }
         return alertes;
     }
+ 
+
 }

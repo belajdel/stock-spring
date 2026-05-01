@@ -1,12 +1,21 @@
 package com.spring.evalutaion;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "produit")
 public class Produit {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nom;
     private Double prix;
     private Integer quantite;
 
-  
+    public Produit() {
+    }
+
     public Produit(Integer id, String nom, Double prix, Integer quantite) {
         this.id = id;
         this.nom = nom;

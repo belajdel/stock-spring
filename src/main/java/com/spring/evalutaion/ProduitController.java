@@ -19,16 +19,31 @@ public class ProduitController {
         List<Produit> produits = produitService.getAllProduits();
         return ResponseEntity.ok(produits);
     }
-    @PostMapping
-    public ResponseEntity<Map<String, String>> createProduit(@RequestBody Produit produit) {
-        produitService.createProduit(produit);
-        
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Produit créé avec succès");
-        response.put("nom", produit.getNom());
-        
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Produit> getProduit(@PathVariable Integer id) {
+        Produit produit = produitService.getProduit(id);
+        return produit != null ? ResponseEntity.ok(produit) : ResponseEntity.notFound().build();
     }
+
+    @PostMapping
+    public ResponseEntity<Produit> createProduit(@RequestBody Produit produit) {
+        Produit saved = produitService.createProduit(produit);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produit> updateProduit(@PathVariable Integer id, @RequestBody Produit produit) {
+        Produit updated = produitService.updateProduit(id, produit);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduit(@PathVariable Integer id) {
+        produitService.deleteProduit(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/alerte/{seuil}")
     public ResponseEntity<List<Produit>> getProduitsAlerte(@PathVariable int seuil) {
         List<Produit> produits = produitService.getProduitsAlerte(seuil);
